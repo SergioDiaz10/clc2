@@ -22,7 +22,7 @@ class Server {
         }) //end point
     */
 
-    this.app.use(this.paths.Personajes, PersonajesRouter)
+    this.app.use(this.paths.Personajes, personajesRouter)
     this.app.use(this.paths.usuarios, usuariosRouter)
     }
 
