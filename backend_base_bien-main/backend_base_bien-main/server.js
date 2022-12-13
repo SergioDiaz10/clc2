@@ -2,7 +2,6 @@ const express = require('express')
 const personajesRouter = require('./routes/personajes')
 const usuariosRouter = require('./routes/usuarios')
 const cors = require("cors")
-
 class Server {
     constructor(){
         this.app = express();

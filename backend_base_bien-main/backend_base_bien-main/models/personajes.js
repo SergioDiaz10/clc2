@@ -10,7 +10,7 @@ quieryAddUser:`INSERT INTO Personajes (
     nombre,
     vida,
     entrenamiento,
-    objecfavorito,
+    objectivofavorito,
     tipodps,
     objectivo,
     espaciovi,
@@ -27,7 +27,7 @@ quieryAddUser:`INSERT INTO Personajes (
     ?
     )`,
 quieryGetUsersInfo: `
-SELECT nombre, vida, entrenamiento, objecfavorito, tipodps, objectivo, espaciovi, velocidad 
+SELECT nombre, vida, entrenamiento, objectivofavorito, tipodps, objectivo, espaciovi, velocidad 
 FROM Personajes
 `,
 quieryUpdateByeUsuario: `
@@ -35,7 +35,7 @@ UPDATE Personajes SET
 nombre = ?,
 vida = ?,
 entrenamiento =?,
-objecfavorito = ?,
+objectivofavorito = ?,
 tipodps = ?,
 objectivo = ?,
 espaciovi = ?,

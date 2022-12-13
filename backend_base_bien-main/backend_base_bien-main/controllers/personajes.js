@@ -5,7 +5,6 @@ const modelojuego = require("../models/personajes");
 
 const getUsers = async (req = request, res = response) =>{
     //estructura basica de cualquier endpoint al conectar en su BD
-    
     let conn;
     //control de exepciones
     try {
@@ -55,7 +54,6 @@ const getUserByID = async (req = request, res = response) =>{
         }
     }
 }
-
 const deleteUserByID = async (req = request, res = response) =>{
     //estructura basica de cualquier endpoint al conectar en su BD este indica el numero estatico
     const {id} = req.query
@@ -64,9 +62,8 @@ const deleteUserByID = async (req = request, res = response) =>{
     //control de exepciones
     try {
         conn = await pool.getConnection()
-        //esta es la consulta mas basica, se pueden hacer mas complejas EN ESTA SE ACTUALIZARA EL USUARIO
+        //esta es la consulta mas basica, se pueden hacer mas complejas EN ESTA SE ACTUALIZARA EL Personaje
         const {affectedRows} = await conn.query(modelojuego.quieryDeleteUsersByeID, [id], (error) => {throw new Error(error) })
-        
         //siempre validar que no se obtuvieron resultados
         if (affectedRows === 0) {
             res.status(404).json({msg:`no se pudo eliminar el registro con el id ${id}`})
@@ -90,12 +87,12 @@ const addUser = async (req = request, res = response) =>{
         nombre,
         vida,
         entrenamiento,
-        objecfavorito,
+        objectivofavorito,
         tipodps,
         objectivo,
         espaciovi,
         velocidad,
-        Activo
+        activo
        
     } = req.body
 
@@ -103,15 +100,15 @@ const addUser = async (req = request, res = response) =>{
         !nombre||
         !vida||
         !entrenamiento||
-        !objecfavorito||
+        !objectivofavorito||
         !tipodps||
         !objectivo||
         !espaciovi||
         !velocidad||
-        !Activo
+        !activo
        
     ){
-        res.status(400).json({msg:"Falta informacion del usuario"})
+        res.status(400).json({msg:"Falta informacion del personaje"})
         return
     }
   
@@ -127,26 +124,26 @@ const addUser = async (req = request, res = response) =>{
             res.status(403).json({msg: `El personaje ${nombre} ya se encuentra registrado`})
             return
         }
-             //esta es la consulta mas basica, se pueden hacer mas complejas EN ESTA SE ACTUALIZARA EL USUARIO
+             //esta es la consulta mas basica, se pueden hacer mas complejas EN ESTA SE ACTUALIZARA EL personaje
         const {affectedRows} = await conn.query(modelojuego.quieryAddUser, [
             nombre,
             vida,
             entrenamiento,
-            objecfavorito,
+            objectivofavorito,
             tipodps,
             objectivo,
             espaciovi,
             velocidad,
-            Activo
+            activo
         ], (error) => {throw new Error(error)})
-            //'${Genero || ''}',
+           
         //siempre validar que no se obtuvieron resultados
        
         if (affectedRows === 0) {
-            res.status(404).json({msg:`no se pudo agregar el registro del usuario ${nombre}`})
+            res.status(404).json({msg:`no se pudo agregar el registro del personaje ${nombre}`})
             return
         }
-        res.json({msg: `El usuario ${nombre} se agrego correctamente.`})
+        res.json({msg: `El personaje ${nombre} se agrego correctamente.`})
         //lo del cath y final siempre sera lo mismo
     } catch (error) {
         console.log(error)
@@ -158,13 +155,13 @@ const addUser = async (req = request, res = response) =>{
     }
 }
 
-const updateUserByUsuario = async (req = request, res = response) =>{
+const updateUserBypersonaje = async (req = request, res = response) =>{
     //estructura basica de cualquier endpoint al conectar en su BD este indica el numero estatico
     const {
         nombre,
         vida,
         entrenamiento,
-        objecfavorito,
+        objectivofavorito,
         tipodps,
         objectivo,
         espaciovi,
@@ -176,7 +173,7 @@ const updateUserByUsuario = async (req = request, res = response) =>{
         !nombre||
         !vida||
         !entrenamiento||
-        !objecfavorito||
+        !objectivofavorito||
         !tipodps||
         !objectivo||
         !espaciovi||
@@ -204,7 +201,7 @@ const updateUserByUsuario = async (req = request, res = response) =>{
             nombre|| user.nombre,
             vida|| user.vida,
             entrenamiento|| user.entrenamiento,
-            objecfavorito|| user.objecfavorito,
+            objectivofavorito|| user.objectivofavorito,
             tipodps|| user.tipodps,
             objectivo|| user.objectivo,
             espaciovi|| user.espaciovi,
@@ -230,4 +227,4 @@ const updateUserByUsuario = async (req = request, res = response) =>{
     }
 }
 
-module.exports = {getUsers, getUserByID, deleteUserByID, addUser, updateUserByUsuario}
+module.exports = {getUsers, getUserByID, deleteUserByID, addUser, updateUserBypersonaje}
